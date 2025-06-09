@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Empresa - ReValúa</title>
+    <link rel="stylesheet" href="css/style.css"> <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="ReValúa Logo">
+                <span>ReValúa</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="button-secondary">Volver al Inicio</a></li>
+                    <li><a href="#" class="button-primary" id="logoutBtn">Cerrar Sesión</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="dashboard-content" class="section-padded">
+        <div class="container dashboard-grid">
+            <div class="sidebar">
+                <ul>
+                    <li class="active" data-content="home"><i class="fas fa-home"></i> Inicio</li>
+                    <li data-content="my-equipment"><i class="fas fa-laptop"></i> Mis Equipos</li>
+                    <li data-content="esg-reports"><i class="fas fa-chart-bar"></i> Reportes ESG</li>
+                    <li data-content="my-sales"><i class="fas fa-handshake"></i> Mis Ventas</li>
+                    <li data-content="settings"><i class="fas fa-cog"></i> Configuración</li>
+                </ul>
+            </div>
+            <div class="main-content">
+                </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 ReValúa. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/dashboard-script.js"></script>
+</body>
+</html>
