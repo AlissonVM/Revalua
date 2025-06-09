@@ -6,6 +6,7 @@
     <title>ReValúa - Tu Plataforma de Revalorización Tecnológica</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
@@ -18,10 +19,11 @@
                 <ul>
                     <li><a href="#about">Nosotros</a></li>
                     <li><a href="#how-it-works">Cómo Funciona</a></li>
+                    <li><a href="#features">Funciones</a></li>
                     <li><a href="#benefits">Beneficios</a></li>
                     <li><a href="#contact">Contacto</a></li>
-                    <li><a href="#" class="button-primary">Iniciar Sesión</a></li>
-                    <li><a href="#" class="button-secondary">Registrarse</a></li>
+                    <li><a href="#" class="button-primary" id="loginBtn">Iniciar Sesión</a></li>
+                    <li><a href="#" class="button-secondary" id="registerBtn">Registrarse</a></li>
                 </ul>
             </nav>
         </div>
@@ -69,6 +71,43 @@
         </div>
     </section>
 
+    <section id="features" class="section-padded">
+        <div class="container">
+            <h2>Explora las Funciones Clave de ReValúa</h2>
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <div class="feature-slide">
+                        <i class="fas fa-chart-line icon-large"></i>
+                        <h3>Panel de Control para Vendedores</h3>
+                        <p>Gestiona fácilmente tus listados, ventas y solicitudes de evaluación desde un solo lugar.</p>
+                    </div>
+                    <div class="feature-slide">
+                        <i class="fas fa-gavel icon-large"></i>
+                        <h3>Subastas y Venta Directa</h3>
+                        <p>Accede a un mercado dinámico para vender tus equipos o comprar tecnología certificada.</p>
+                    </div>
+                    <div class="feature-slide">
+                        <i class="fas fa-award icon-large"></i>
+                        <h3>Certificación y Trazabilidad</h3>
+                        <p>Cada equipo vendido incluye un certificado técnico y su historial de condición.</p>
+                    </div>
+                     <div class="feature-slide">
+                        <i class="fas fa-leaf icon-large"></i>
+                        <h3>Reportes ESG Personalizados</h3>
+                        <p>Recibe informes detallados sobre el ahorro ambiental y el retorno financiero generado.</p>
+                    </div>
+                    <div class="feature-slide">
+                        <i class="fas fa-headset icon-large"></i>
+                        <h3>Soporte y Logística Integrados</h3>
+                        <p>Chat de atención al cliente, seguimiento de pedidos y gestión de entregas.</p>
+                    </div>
+                </div>
+                <button class="carousel-button prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-button next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
     <section id="benefits" class="section-padded">
         <div class="container">
             <h2>Beneficios para tu Empresa</h2>
@@ -90,7 +129,7 @@
                     <p>Panel de control intuitivo para seguir tus ventas y el historial de tus equipos.</p>
                 </div>
             </div>
-            <p class="call-to-action">¿Listo para revalorizar tus activos? <a href="#" class="button-primary">Regístrate ahora</a></p>
+            <p class="call-to-action">¿Listo para revalorizar tus activos? <a href="#" class="button-primary" id="registerCtaBtn">Regístrate ahora</a></p>
         </div>
     </section>
 
@@ -101,14 +140,49 @@
                 <blockquote>"Gracias a ReValúa, logramos recuperar $25,000 de equipos que antes íbamos a descartar. ¡Un proceso sencillo y con un impacto ambiental real!"</blockquote>
                 <p>— Gerente de Operaciones, Empresa de Telecomunicaciones</p>
             </div>
+        </div>
+    </section>
+
+    <section id="buy-section" class="section-padded">
+        <div class="container">
+            <h2>Encuentra Tecnología Reacondicionada Certificada</h2>
+            <p>Explora nuestra selección de laptops, tablets, impresoras y más, con la garantía de ReValúa.</p>
+            <div class="search-bar-mockup">
+                <input type="text" placeholder="Buscar por tipo de equipo, marca o precio...">
+                <button type="submit"><i class="fas fa-search"></i> Buscar</button>
             </div>
+            <div class="product-grid-mockup">
+                <div class="product-card">
+                    <img src="images/product-laptop.jpg" alt="Laptop Reacondicionada">
+                    <h4>Laptop Dell Latitude E7470</h4>
+                    <p>Estado: Excelente | Certificado: RV-2025-001</p>
+                    <span class="price">$550 USD</span>
+                    <button class="button-primary btn-small">Ver Detalles</button>
+                </div>
+                <div class="product-card">
+                    <img src="images/product-monitor.jpg" alt="Monitor Reacondicionado">
+                    <h4>Monitor HP EliteDisplay E243</h4>
+                    <p>Estado: Muy Bueno | Certificado: RV-2025-002</p>
+                    <span class="price">$180 USD</span>
+                    <button class="button-primary btn-small">Ver Detalles</button>
+                </div>
+                <div class="product-card">
+                    <img src="images/product-printer.jpg" alt="Impresora Reacondicionada">
+                    <h4>Impresora Brother MFC-L2700DW</h4>
+                    <p>Estado: Bueno | Certificado: RV-2025-003</p>
+                    <span class="price">$120 USD</span>
+                    <button class="button-primary btn-small">Ver Detalles</button>
+                </div>
+            </div>
+            <a href="#" class="button-secondary">Ver Más Productos</a>
+        </div>
     </section>
 
     <section id="cta-final" class="section-padded">
         <div class="container text-center">
             <h2>Únete a ReValúa y sé parte del cambio</h2>
             <p>Ya seas una empresa que busca revalorizar sus equipos o un comprador interesado en tecnología certificada.</p>
-            <a href="#" class="button-primary">Empieza Hoy Mismo</a>
+            <a href="#" class="button-primary" id="finalCtaBtn">Empieza Hoy Mismo</a>
         </div>
     </section>
 
@@ -119,9 +193,9 @@
                     <h3>ReValúa</h3>
                     <p>Revalorizando la tecnología, cuidando el planeta.</p>
                     <div class="social-links">
-                        <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook"></a>
-                        <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitter--v1.png" alt="Twitter"></a>
-                        <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="LinkedIn"></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -129,6 +203,7 @@
                     <ul>
                         <li><a href="#about">Sobre Nosotros</a></li>
                         <li><a href="#how-it-works">Cómo Funciona</a></li>
+                        <li><a href="#features">Funciones</a></li>
                         <li><a href="#benefits">Beneficios</a></li>
                         <li><a href="#">Preguntas Frecuentes</a></li>
                     </ul>
@@ -153,6 +228,56 @@
             </div>
         </div>
     </footer>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Regístrate en ReValúa</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regEmail">Correo Electrónico</label>
+                    <input type="email" id="regEmail" required placeholder="tu@empresa.com">
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Contraseña</label>
+                    <input type="password" id="regPassword" required placeholder="Crea una contraseña segura">
+                </div>
+                <div class="form-group">
+                    <label for="regConfirmPassword">Confirmar Contraseña</label>
+                    <input type="password" id="regConfirmPassword" required placeholder="Repite tu contraseña">
+                </div>
+                <div class="form-group">
+                    <label for="userType">Quiero:</label>
+                    <select id="userType" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="seller">Vender equipos</option>
+                        <option value="buyer">Comprar equipos</option>
+                    </select>
+                </div>
+                <button type="submit" class="button-primary">Crear Cuenta</button>
+            </form>
+            <p class="modal-link">¿Ya tienes cuenta? <a href="#" id="openLoginFromRegister">Inicia Sesión aquí</a></p>
+        </div>
+    </div>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Inicia Sesión en ReValúa</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Correo Electrónico</label>
+                    <input type="email" id="loginEmail" required placeholder="tu@empresa.com">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Contraseña</label>
+                    <input type="password" id="loginPassword" required placeholder="Tu contraseña">
+                </div>
+                <button type="submit" class="button-primary">Acceder</button>
+            </form>
+            <p class="modal-link">¿No tienes cuenta? <a href="#" id="openRegisterFromLogin">Regístrate aquí</a></p>
+        </div>
+    </div>
 
     <script src="js/script.js"></script>
 </body>
