@@ -1,3 +1,514 @@
+:root {
+    /* Colores primarios y secundarios */
+    --primary-color: #28a745;   /* Verde principal */
+    --secondary-color: #007bff; /* Azul secundario */
+    --accent-color: #ffc107;    /* Amarillo/Naranja de acento */
+
+    /* Colores de texto y fondo */
+    --text-color: #343a40;      /* Color de texto general (gris oscuro) */
+    --light-grey: #6c757d;      /* Gris para texto secundario */
+    --dark-grey: #495057;       /* Gris más oscuro */
+    --white: #ffffff;           /* Blanco puro */
+    --light-bg: #f8f9fa;        /* Fondo claro (ej. para secciones) */
+    --dark-bg: #212529;         /* Fondo oscuro (ej. para footer) */
+
+    /* Colores para bordes y sombras */
+    --border-color: #dee2e6;    /* Color de borde ligero */
+    --shadow-color: rgba(0,0,0,0.1); /* Color de sombra para cards, etc. */
+
+    /* Fuentes y espaciado (opcional, pero útil) */
+    --font-family-base: 'Montserrat', sans-serif;
+    --spacing-unit: 1rem; /* Define una unidad base para espaciado */
+}
+
+/* Estilos Generales */
+body {
+    font-family: var(--font-family-base);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--white);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-padded {
+    padding: 80px 0;
+}
+
+.bg-light {
+    background-color: var(--light-bg);
+}
+
+/* Encabezado */
+header {
+    background-color: var(--white);
+    padding: 15px 0;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.logo span {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+header nav ul li {
+    margin-left: 25px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: var(--dark-grey);
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: var(--primary-color);
+}
+
+/* Botones */
+.button-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+    border: none; /* Asegura que no haya borde por defecto */
+    cursor: pointer;
+}
+
+.button-primary:hover {
+    background-color: #218838; /* Un verde un poco más oscuro */
+    transform: translateY(-2px);
+}
+
+.button-secondary {
+    background-color: transparent;
+    color: var(--primary-color);
+    padding: 10px 20px;
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.button-secondary:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.button-primary.btn-small, .button-secondary.btn-small {
+    padding: 8px 15px;
+    font-size: 0.9em;
+}
+
+/* Sección Hero */
+#hero {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/hero-image.jpg') no-repeat center center/cover;
+    color: var(--white);
+    text-align: center;
+    padding: 120px 0;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#hero h1 {
+    font-size: 3.2em;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    max-width: 800px;
+}
+
+#hero p {
+    font-size: 1.3em;
+    margin-bottom: 40px;
+    max-width: 700px;
+}
+
+.hero-buttons .button-primary,
+.hero-buttons .button-secondary {
+    margin: 0 10px;
+    font-size: 1.1em;
+    padding: 15px 30px;
+}
+
+/* Secciones Generales */
+h2 {
+    font-size: 2.5em;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+.call-to-action {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 1.2em;
+}
+
+/* Cómo Funciona */
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.step-card {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    transition: transform 0.3s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-10px);
+}
+
+.step-card img {
+    max-width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.step-card h3 {
+    color: var(--text-color);
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+/* Características Destacadas (Carrusel) */
+#features {
+    overflow: hidden; /* Oculta los slides fuera de vista */
+}
+
+.carousel-container {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0 50px; /* Espacio para los botones */
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.feature-slide {
+    min-width: calc(33.333% - 20px); /* 3 slides por vista, con espacio */
+    margin: 0 10px; /* Espacio entre slides */
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    text-align: center;
+    box-sizing: border-box; /* Incluye padding y border en el width */
+    flex-shrink: 0; /* Evita que los slides se encojan */
+}
+
+.feature-slide .icon-large {
+    font-size: 3.5em;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.feature-slide h3 {
+    color: var(--primary-color);
+    font-size: 1.4em;
+    margin-bottom: 15px;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.5);
+    color: var(--white);
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-button:hover {
+    background-color: rgba(0,0,0,0.7);
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+
+/* Beneficios */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.benefit-item {
+    background-color: var(--light-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.benefit-item h3 {
+    color: var(--text-color);
+    font-size: 1.4em;
+    margin-bottom: 15px;
+}
+
+/* Testimonios */
+#testimonials .testimonial-card {
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#testimonials .testimonial-card blockquote {
+    font-size: 1.4em;
+    font-style: italic;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+#testimonials .testimonial-card p {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.1em;
+}
+
+/* Sección Comprar (Mockup) */
+.search-bar-mockup {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.search-bar-mockup input {
+    width: 60%;
+    padding: 12px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px 0 0 5px;
+    font-size: 1em;
+}
+
+.search-bar-mockup button {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar-mockup button:hover {
+    background-color: #0056b3; /* Un azul un poco más oscuro */
+}
+
+.product-grid-mockup {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.product-card {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    text-align: center;
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-card h4 {
+    color: var(--text-color);
+    font-size: 1.3em;
+    margin: 15px 10px 5px;
+}
+
+.product-card p {
+    font-size: 0.95em;
+    color: var(--light-grey);
+    margin: 0 10px 10px;
+}
+
+.product-card .price {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 15px;
+}
+
+.product-card .button-primary {
+    display: block;
+    width: calc(100% - 40px); /* 100% menos padding */
+    margin: 0 20px 20px;
+    padding: 10px;
+    font-size: 1em;
+}
+
+
+/* Llamada a la Acción Final */
+#cta-final {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 80px 0;
+}
+
+#cta-final h2 {
+    color: var(--white);
+    margin-bottom: 20px;
+}
+
+#cta-final p {
+    max-width: 700px;
+    margin: 0 auto 40px;
+}
+
+#cta-final .button-primary {
+    background-color: var(--white);
+    color: var(--primary-color);
+}
+
+#cta-final .button-primary:hover {
+    background-color: var(--light-bg);
+}
+
+/* Pie de página */
+footer {
+    background-color: var(--dark-bg);
+    color: var(--white);
+    padding: 60px 0 20px;
+    font-size: 0.9em;
+}
+
+.footer-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.footer-col h3 {
+    color: var(--white);
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.footer-col p, .footer-col ul li {
+    color: var(--light-grey);
+    margin-bottom: 10px;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li a {
+    text-decoration: none;
+    color: var(--light-grey);
+    transition: color 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: var(--white);
+}
+
+.social-links a {
+    color: var(--white);
+    font-size: 1.5em;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
 /* Modales (Pop-ups) */
 .modal {
     display: none; /* Oculto por defecto */
@@ -317,4 +828,115 @@ body.modal-open {
     border: 1px solid var(--border-color);
     border-radius: 5px;
     margin-bottom: 15px;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 992px) {
+    header nav ul li {
+        margin-left: 15px;
+    }
+    #hero h1 {
+        font-size: 2.5em;
+    }
+    #hero p {
+        font-size: 1.1em;
+    }
+    .carousel-container {
+        padding: 0 20px; /* Menos espacio para los botones en tablets */
+    }
+    .feature-slide {
+        min-width: calc(50% - 20px); /* 2 slides por vista en tablets */
+    }
+    .dashboard-grid {
+        flex-direction: column;
+    }
+    .dashboard-grid .sidebar {
+        min-width: auto;
+        width: 100%;
+        padding: 15px 0;
+        text-align: center;
+    }
+    .dashboard-grid .sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    .dashboard-grid .sidebar ul li {
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    header nav {
+        margin-top: 15px;
+    }
+    header nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    header nav ul li {
+        margin: 5px 10px;
+    }
+    #hero {
+        padding: 80px 0;
+    }
+    #hero h1 {
+        font-size: 2em;
+    }
+    #hero p {
+        font-size: 1em;
+    }
+    .hero-buttons .button-primary,
+    .hero-buttons .button-secondary {
+        display: block;
+        width: 80%;
+        margin: 15px auto;
+    }
+    h2 {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+    .section-padded {
+        padding: 60px 0;
+    }
+    .step-card, .benefit-item, .product-card {
+        padding: 20px;
+    }
+    .feature-slide {
+        min-width: calc(100% - 20px); /* 1 slide por vista en móviles */
+    }
+    .carousel-container {
+        padding: 0 10px; /* Ajuste para los botones en móviles */
+    }
+    .carousel-button {
+        padding: 10px;
+        font-size: 1em;
+    }
+    .search-bar-mockup input {
+        width: 70%;
+    }
+    .footer-columns {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .footer-col .social-links {
+        margin-top: 15px;
+    }
+    .modal-content {
+        width: 95%; /* Más ancho en pantallas pequeñas */
+    }
+    .dashboard-grid .sidebar ul li {
+        flex-direction: column; /* Icono y texto apilados */
+        gap: 5px;
+        font-size: 0.9em;
+    }
+    .dashboard-grid .sidebar ul li i {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
 }
