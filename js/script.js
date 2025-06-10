@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let slideIndex = 0;
     let slidesPerView = 3; // Por defecto para desktop
 
-    // Función para actualizar slidesPerView basada en el tamaño de la ventana
     const updateSlidesPerView = () => {
         if (window.innerWidth <= 768) {
             slidesPerView = 1; // 1 slide en móviles
@@ -27,173 +26,178 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             slidesPerView = 3; // 3 slides en desktop
         }
-        updateCarousel(); // Actualiza la vista del carrusel si cambia slidesPerView
+        // Llamar a updateCarousel para ajustar la posición después de cambiar slidesPerView
+        updateCarousel();
     };
 
     const updateCarousel = () => {
-        const slideWidth = slides[0].offsetWidth + (parseFloat(getComputedStyle(slides[0]).marginLeft) * 2);
-        carouselTrack.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+        // Calcula el ancho de un slide incluyendo los márgenes
+        const slideStyle = getComputedStyle(slides[0]);
+        const slideMarginLeft = parseFloat(slideStyle.marginLeft);
+        const slideMarginRight = parseFloat(slideStyle.marginRight);
+        const slideWidthWithMargin = slides[0].offsetWidth + slideMarginLeft + slideMarginRight;
 
-        // Control de botones de navegación (opcional, para loop infinito o límites)
-        // Si no es un loop, ocultar/deshabilitar botones al inicio/fin
+        // Asegura que slideIndex no exceda los límites
+        const maxIndex = Math.max(0, slides.length - slidesPerView);
+        slideIndex = Math.min(slideIndex, maxIndex);
+
+        carouselTrack.style.transform = `translateX(-${slideIndex * slideWidthWithMargin}px)`;
+
+        // Control de visibilidad de los botones de navegación
         prevButton.style.display = slideIndex === 0 ? 'none' : 'block';
-        nextButton.style.display = slideIndex >= (slides.length - slidesPerView) ? 'none' : 'block';
+        nextButton.style.display = slideIndex >= maxIndex ? 'none' : 'block';
     };
 
     nextButton.addEventListener('click', () => {
-        if (slideIndex < (slides.length - slidesPerView)) {
+        const maxIndex = Math.max(0, slides.length - slidesPerView);
+        if (slideIndex < maxIndex) {
             slideIndex++;
         } else {
-            slideIndex = 0; // Vuelve al inicio para un loop simple
+            slideIndex = 0; // Vuelve al inicio si llega al final (loop)
         }
         updateCarousel();
     });
 
     prevButton.addEventListener('click', () => {
+        const maxIndex = Math.max(0, slides.length - slidesPerView);
         if (slideIndex > 0) {
             slideIndex--;
         } else {
-            slideIndex = slides.length - slidesPerView; // Vuelve al final para un loop simple
-            if (slideIndex < 0) slideIndex = 0; // Asegura que no sea negativo si hay pocos slides
+            slideIndex = maxIndex; // Vuelve al final si llega al inicio (loop)
         }
         updateCarousel();
     });
 
     // Ejecutar al cargar la página y al redimensionar
     updateSlidesPerView(); // Establece el valor inicial
-    window.addEventListener('resize', () => {
-        updateSlidesPerView();
-        updateCarousel(); // Vuelve a centrar el carrusel en caso de redimensionamiento
-    });
+    window.addEventListener('resize', updateSlidesPerView); // Actualiza al redimensionar
     // Forzar la primera actualización para asegurar que los botones estén bien al cargar
     setTimeout(updateCarousel, 100);
 
 
-    // --- Simulación de interacción en el Dashboard Preview ---
-    const sidebarItems = document.querySelectorAll('.dashboard-mockup .sidebar ul li');
-    const mainContent = document.querySelector('.dashboard-mockup .main-content');
+    // --- Lógica de Modales (Registro y Login) ---
+    const registerModal = document.getElementById('registerModal');
+    const loginModal = document.getElementById('loginModal');
+    const registerBtn = document.getElementById('registerBtn');
+    const loginBtn = document.getElementById('loginBtn');
+    const registerCtaBtn = document.getElementById('registerCtaBtn'); // Botón "Regístrate ahora" en beneficios
+    const finalCtaBtn = document.getElementById('finalCtaBtn'); // Botón "Empieza Hoy Mismo" al final
 
-    sidebarItems.forEach(item => {
-        item.addEventListener('click', () => {
-            // Remueve la clase 'active' de todos los elementos
-            sidebarItems.forEach(i => i.classList.remove('active'));
-            // Añade la clase 'active' al elemento clickeado
-            item.classList.add('active');
+    const closeButtons = document.querySelectorAll('.modal .close-button');
+    const registerForm = document.getElementById('registerForm');
+    const loginForm = document.getElementById('loginForm');
 
-            // Simula cambio de contenido (muy básico, en un proyecto real se cargaría dinámicamente)
-            const section = item.textContent.trim();
-            let contentHtml = '';
+    const openLoginFromRegister = document.getElementById('openLoginFromRegister');
+    const openRegisterFromLogin = document.getElementById('openRegisterFromLogin');
 
-            switch (section) {
-                case 'Inicio':
-                    contentHtml = `
-                        <h3>¡Bienvenido, [Nombre de Empresa]!</h3>
-                        <div class="stats-grid">
-                            <div class="stat-card">
-                                <i class="fas fa-dollar-sign"></i>
-                                <h4>Ingresos Generados</h4>
-                                <p>$25,000 USD</p>
-                            </div>
-                            <div class="stat-card">
-                                <i class="fas fa-recycle"></i>
-                                <h4>Equipos Revalorizados</h4>
-                                <p>400 unidades</p>
-                            </div>
-                            <div class="stat-card">
-                                <i class="fas fa-cloud-sun"></i>
-                                <h4>CO2 Evitado</h4>
-                                <p>15 toneladas</p>
-                            </div>
-                        </div>
-                        <div class="latest-activity">
-                            <h4>Actividad Reciente</h4>
-                            <ul>
-                                <li>Laptop Dell XPS 15 vendida en subasta. <strong>+ $800</strong></li>
-                                <li>Solicitud de evaluación para 50 monitores.</li>
-                                <li>Impresora HP LaserJet 1020 en revisión técnica.</li>
-                            </ul>
-                        </div>
-                    `;
-                    break;
-                case 'Mis Equipos':
-                    contentHtml = `
-                        <h3>Mis Equipos Publicados</h3>
-                        <p>Aquí verías un listado de todos tus equipos activos y en proceso de venta.</p>
-                        <ul class="simple-list">
-                            <li><i class="fas fa-laptop"></i> Laptop Lenovo T480 (En Subasta)</li>
-                            <li><i class="fas fa-print"></i> 2 Impresoras Epson L3110 (Pendiente de Evaluación)</li>
-                            <li><i class="fas fa-tablet-alt"></i> 10 Tablets Samsung (Vendido)</li>
-                        </ul>
-                        <button class="button-primary btn-small" style="margin-top: 20px;">+ Añadir Nuevo Equipo</button>
-                    `;
-                    break;
-                case 'Reportes ESG':
-                    contentHtml = `
-                        <h3>Reportes de Sostenibilidad (ESG)</h3>
-                        <p>Descarga tus informes de impacto ambiental y retorno de inversión.</p>
-                        <div class="report-links">
-                            <a href="#" class="button-secondary btn-small"><i class="fas fa-file-pdf"></i> Reporte Anual ESG 2024</a>
-                            <a href="#" class="button-secondary btn-small"><i class="fas fa-chart-pie"></i> Análisis de Huella de Carbono</a>
-                        </div>
-                    `;
-                    break;
-                case 'Mis Ventas':
-                    contentHtml = `
-                        <h3>Historial de Ventas</h3>
-                        <p>Consulta tus ventas completadas y en proceso.</p>
-                        <table class="mock-table">
-                            <thead>
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Precio Venta</th>
-                                    <th>Fecha</th>
-                                    <th>Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Laptop Dell XPS 15</td>
-                                    <td>$800</td>
-                                    <td>2025-05-10</td>
-                                    <td>Completada</td>
-                                </tr>
-                                <tr>
-                                    <td>Impresora HP</td>
-                                    <td>$120</td>
-                                    <td>2025-04-22</td>
-                                    <td>Completada</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    `;
-                    break;
-                case 'Configuración':
-                    contentHtml = `
-                        <h3>Configuración de Cuenta</h3>
-                        <p>Gestiona los detalles de tu empresa, notificaciones y métodos de pago.</p>
-                        <form class="mock-form">
-                            <label for="companyName">Nombre de la Empresa:</label>
-                            <input type="text" id="companyName" value="[Tu Empresa S.A.]">
-                            <label for="email">Email de Contacto:</label>
-                            <input type="email" id="email" value="contacto@[tuempresa].com">
-                            <button type="submit" class="button-primary btn-small">Guardar Cambios</button>
-                        </form>
-                    `;
-                    break;
-                default:
-                    contentHtml = `<h3>Contenido no disponible para ${section}</h3>`;
-            }
-            mainContent.innerHTML = contentHtml;
+    // Función para abrir modal
+    const openModal = (modal) => {
+        modal.style.display = 'flex'; // Usamos flex para centrar
+        document.body.classList.add('modal-open'); // Para evitar scroll en el body
+    };
+
+    // Función para cerrar modal
+    const closeModal = (modal) => {
+        modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+    };
+
+    // Eventos para abrir modales
+    registerBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal(registerModal);
+    });
+
+    loginBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal(loginModal);
+    });
+
+    // Estos CTA también abrirán el registro
+    registerCtaBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal(registerModal);
+    });
+
+    finalCtaBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal(registerModal);
+    });
+
+
+    // Eventos para cerrar modales
+    closeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            closeModal(e.target.closest('.modal'));
         });
     });
 
-    // Trigger initial load for Dashboard Preview
-    sidebarItems[0].click(); // Simula un clic en "Inicio" al cargar
+    // Cerrar modal al hacer clic fuera del contenido
+    window.addEventListener('click', (e) => {
+        if (e.target === registerModal) {
+            closeModal(registerModal);
+        }
+        if (e.target === loginModal) {
+            closeModal(loginModal);
+        }
+    });
 
-    // --- Imágenes para productos (simulación) ---
-    // Puedes cargar estas imágenes si no existen
-    // [Image of a modern laptop] (for product-laptop.jpg)
-    // [Image of a computer monitor] (for product-monitor.jpg)
-    // [Image of a desktop printer] (for product-printer.jpg)
+    // Cambiar entre modales desde los enlaces "Ya tienes cuenta" / "No tienes cuenta"
+    openLoginFromRegister.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeModal(registerModal);
+        openModal(loginModal);
+    });
 
+    openRegisterFromLogin.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeModal(loginModal);
+        openModal(registerModal);
+    });
+
+
+    // --- Simulación de Registro ---
+    registerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const regEmail = document.getElementById('regEmail').value;
+        const regPassword = document.getElementById('regPassword').value;
+        const regConfirmPassword = document.getElementById('regConfirmPassword').value;
+        const userType = document.getElementById('userType').value;
+
+        if (regPassword !== regConfirmPassword) {
+            alert('Las contraseñas no coinciden. Por favor, inténtalo de nuevo.');
+            return;
+        }
+
+        if (regEmail && regPassword && userType) {
+            alert(`¡Registro exitoso para ${regEmail} como ${userType === 'seller' ? 'Vendedor' : 'Comprador'}! Te estamos redirigiendo...`);
+            closeModal(registerModal);
+            // Simular redirección al dashboard (lo manejamos en el login)
+            // En un proyecto real, aquí se enviarían los datos al servidor y se manejaría la respuesta.
+            // Por ahora, solo cerramos el modal y se le pedirá iniciar sesión.
+            openModal(loginModal); // Tras registrarse, se le pide iniciar sesión
+        } else {
+            alert('Por favor, completa todos los campos.');
+        }
+    });
+
+    // --- Simulación de Inicio de Sesión ---
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const loginEmail = document.getElementById('loginEmail').value;
+        const loginPassword = document.getElementById('loginPassword').value;
+
+        // Simulación de credenciales válidas
+        if (loginEmail === 'empresa@ejemplo.com' && loginPassword === 'password123') {
+            alert('¡Inicio de sesión exitoso! Redirigiendo a tu panel...');
+            closeModal(loginModal);
+            // Redirigir a la página del dashboard
+            window.location.href = 'dashboard.html';
+        } else {
+            alert('Correo o contraseña incorrectos. Inténtalo de nuevo. (Usar: empresa@ejemplo.com / password123)');
+        }
+    });
 });
+
+// Añade esta clase al body cuando un modal esté abierto para evitar scroll
+document.body.classList.remove('modal-open'); // Asegúrate que no esté al cargar
