@@ -12,6 +12,17 @@
     justify-content: center; /* Centra el contenido horizontalmente */
     align-items: center; /* Centra el contenido verticalmente */
     padding: 20px;
+    /* Las siguientes 3 propiedades son importantes para la animación con JS: */
+    opacity: 0; /* Inicialmente invisible */
+    pointer-events: none; /* No interactuable cuando está oculto */
+    transition: opacity 0.3s ease-out; /* Transición suave para aparecer/desaparecer */
+}
+
+/* Esta clase se añade/quita con JavaScript para mostrar/ocultar el modal y activar la animación */
+.modal.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    display: flex; /* Asegura que el contenedor del modal sea flex para centrar */
 }
 
 .modal-content {
@@ -23,17 +34,22 @@
     width: 90%;
     max-width: 500px;
     position: relative;
-    animation: fadeIn 0.3s ease-out; /* Pequeña animación de entrada */
+    /* Aquí se aplican las propiedades de transición para la animación del contenido */
+    transform: translateY(-20px); /* Estado inicial para la animación de entrada */
+    opacity: 0; /* Estado inicial para la animación de entrada */
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
 
+/* Cuando el modal es visible, aplicamos el estado final de la animación al contenido */
+.modal.is-visible .modal-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* La regla @keyframes debe estar en el nivel superior del archivo CSS */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-.modal-content {
-    /* ... otras propiedades ... */
-    animation: fadeIn 0.3s ease-out; /* Aquí se aplica */
 }
 
 .close-button {
@@ -100,6 +116,11 @@
     text-align: center;
     margin-top: 20px;
     font-size: 0.95em;
+}
+
+/* Añadir esta clase al body para evitar el scroll cuando un modal está abierto */
+body.modal-open {
+    overflow: hidden;
 }
 
 /* Estilos para el dashboard (ajustes para la nueva estructura) */
